@@ -1,0 +1,338 @@
+/*CSS by Ella Villacreses*/
+@layer reset, base, layout, components, utilities, overrides;
+
+/*Imported Fonts*/
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Myeongjo&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+/*Font Licensing Notes
+Fonts sourced from Google Fonts: Playfair Display, Nanum Gothic, Nanum Myeongjo
+Each font is distributed under an open source license and pertains to the SIL Open Font
+License Version 1.1 - 26 February 2007 */
+
+/*CSS Reset*/
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+  }
+}
+
+/*ROOT*/
+@layer base {
+  :root {
+
+    /*Color*/
+    --beige: #EBE6DA;
+    --black: #000000;
+    --lt-pink: #CCBAB5;
+    --dark-pink: #FC94AF;
+    --off-white: #F3F2EE;
+    --white: #FFFFFF;
+      
+    /*Type*/
+    --font-body: Playfair display, Arial, sans-serif;
+    --font-heading: Nanum Gothic, Arial, sans-serif;
+    --font-title: Nanum Myeongjo, Arial, sans-serif;
+
+    /*Type Spacing*/
+    --line-height: 1.5;
+    --text-base: 1rem;
+    --text-medium: 1.25rem;
+    --text-large: 1.75rem;
+
+    /*Spacing*/
+    --sm-padding: 12px;
+    --md-padding: 16px;
+    --lg-padding: 24px;
+
+    /*Shape*/
+    --small-radius: 4px;
+    --medium-radius: 8px;
+    --big-radius: 16px;
+
+    /*Focus*/
+    --focus-color: #7F6244;
+    --focus-width: 2px;
+  }
+
+  img,
+  svg {
+    max-width: 100%;
+  }
+}
+
+/*GLOBAL STYLES Mobile first*/
+
+/*Base*/
+@layer base {
+  body {
+    font-family: var(--font-body);
+    line-height: var(--line-height);
+    color: var(--black);
+    margin: 0;
+  }
+  
+  h1 {
+    font-family: var(--font-title);
+    color: var(--black);
+  }
+  
+  h2 {
+    font-family: var(--font-heading);
+    color: var(--black);
+    line-height: var(--line-height);
+  }
+
+  h1,
+  h2 {
+    margin-block-start: var(--lg-padding);
+    margin-block-end: var(--md-padding);
+  }
+
+  p {
+    font-size: var(--text-base);
+    line-height: var(--line-height);
+    margin-block-end: var(--md-padding);
+  }
+
+  a {
+    color: var(--black);
+    text-decoration: underline;
+  }
+  
+  a:hover {
+    color: var(--focus-color);
+  }
+}
+
+/*Layout*/
+@layer layout {
+  .wrapper {
+    inline-size: min(100% - 2rem, 72rem);
+    margin-inline: auto;
+  }
+
+  .card-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--lg-padding);
+    max-width: 1440px;
+    margin-inline: auto;
+  }
+
+  @media (min-width: 768px) {
+    .card-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .card-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  header {
+    background: var(--beige);
+    color: var(--black);
+    padding-block: var(--lg-padding);
+    padding-inline: var(--md-padding);
+  }
+  
+  .site-header nav ul {
+    list-style: none;
+    margin: 16px 0 0 0;
+    display: flex;
+    gap: 16px;
+    color: var(--focus-color);
+  }
+  
+  main {
+    padding-block: var(--lg-padding);
+    padding-inline: var(--md-padding);
+  }
+
+  footer {
+    background: var(--lt-pink);
+    color: var(--black);
+    padding-block: var(--lg-padding);
+    padding-inline: var(--md-padding);
+  }
+
+  .project-details {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: var(--lg-padding);
+    align-items: start;
+  }
+
+  .project-description {
+    min-inline-size: 0;
+  }
+
+  @media (max-width: 700px) {
+    .project-details {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+/*Components*/
+@layer components {
+    .button {
+    display: inline-block;
+    background: var(--lt-pink);
+    color: var(--black);
+    padding: var(--sm-padding) var(--md-padding);
+    border-radius: var(--small-radius);
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .card {
+    container-type: inline-size;
+    background: var(--white);
+    color: var(--black);
+    display: grid;
+    min-width: 0;
+    border: 1px solid var(--dark-pink);
+    border-radius: var(--small-radius);
+    padding: var(--lg-padding);
+    gap: var(--md-padding);
+
+    transition: transform 0.3s ease;
+  }
+
+  .card img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
+    aspect-ratio: 3 / 2;
+  }
+
+  .card-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--md-padding);
+  }
+
+  @container (min-width: 30rem) {
+    .card-content {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+  }
+  
+  .project-links {
+    list-style: none;
+    display: grid;
+    padding-inline-start: 0;
+    gap: var(--md-padding);
+  }
+
+  form {
+    border: 4px solid var(--dark-pink);
+    padding: var(--md-padding);
+    background: var(--lt-pink);
+  }
+
+  .site-header nav a[aria-current='page'] {
+    text-decoration: underline;
+    font-weight: bold;
+  }
+  
+  /*Component States*/
+
+  .button:hover,
+  button:hover {
+    background: var(--dark-pink);
+    color: var(--black);
+  }
+
+  .button:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--focus-color);
+  }
+
+  .button:active,
+  button:active {
+    background: var(--off-white);
+    color: var(--black);
+  }
+
+  .card:hover,
+  .card:focus-within {
+    transform: translateY(-5px);
+  }
+}
+
+/*Utilities*/
+@layer utilities {
+  .text-center {
+    text-align: center;
+  }
+
+  .brown-background {
+    background-color: var(--focus-color);
+  }
+
+  .no-margin {
+    margin: 0;
+  }
+}
+
+@layer overrides {
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --beige: #242424;
+      --black: #F3F2EE;
+      --lt-pink: #383033;
+      --dark-pink: #4A4A4A;
+      --white: #2D2D2D; 
+      --off-white: #1A1A1A;
+      --focus-color: #FC94AF;
+    }
+
+    .site-header nav a {
+      color: var(--focus-color);
+    }
+  }
+
+  @media print {
+    img {
+      display: none;
+    }
+
+    body {
+      background-color: var(--white);
+      color: var(--black);
+      font-size: 12pt;
+    }
+
+    a {
+      color: var(--black);
+    }
+
+    .site-header nav {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card {
+      transition: none;
+    }
+
+  .card:hover,
+  .card:focus-within {
+    transform: none;
+  }
+  }
+}
+
